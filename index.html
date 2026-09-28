@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Smarter Tomorrow | People • Technology • Nature in Harmony</title>
+  <meta name="description" content="An interactive frontend portal transforming the vision of sustainable smart city ecosystems into reality: Clean Energy, Smart Living, Seamless Mobility, Resource Efficiency, and Automated Systems.">
+  <meta name="keywords" content="Smart City, Clean Energy, Sustainable Architecture, Seamless Mobility, Automated Logistics, Biophilic Living">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <!-- Interactive Background Canvas & Ambient Glows -->
+  <canvas id="particles-canvas"></canvas>
+  <div class="ambient-glow-1"></div>
+  <div class="ambient-glow-2"></div>
+
+  <!-- Mobile Navigation Backdrop & Drawer -->
+  <div class="mobile-nav-backdrop" id="mobile-nav-backdrop"></div>
+  <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+    <div>
+      <div class="mobile-nav-header">
+        <div class="brand-logo">
+          <img src="assets/logo.png" alt="Logo" class="brand-logo-img" style="width: 36px; height: 36px;">
+          <span class="brand-name" style="font-size: 1rem;">SMARTER<span class="text-cyan">TOMORROW</span></span>
+        </div>
+        <button class="icon-btn" id="mobile-nav-close" aria-label="Close Menu">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <ul class="mobile-nav-links">
+        <li><a href="#hero" class="mobile-nav-link active"><i class="fa-solid fa-house"></i> Vision</a></li>
+        <li><a href="#blueprint" class="mobile-nav-link"><i class="fa-solid fa-crosshairs"></i> Blueprint</a></li>
+        <li><a href="#pillars" class="mobile-nav-link"><i class="fa-solid fa-cubes"></i> 5 Core Pillars</a></li>
+        <li><a href="#ecosystem" class="mobile-nav-link"><i class="fa-solid fa-infinity"></i> Infinity Loop</a></li>
+        <li><a href="#calculator" class="mobile-nav-link"><i class="fa-solid fa-calculator"></i> Impact Calc</a></li>
+        <li><a href="#gallery" class="mobile-nav-link"><i class="fa-solid fa-images"></i> Gallery</a></li>
+      </ul>
+    </div>
+
+    <div style="padding-top: 1.5rem; border-top: 1px solid var(--border-subtle); display: flex; flex-direction: column; gap: 0.8rem;">
+      <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">System Core Status</div>
+      <div style="font-size: 0.85rem; color: var(--accent-green); display: flex; align-items: center; gap: 0.5rem;">
+        <span class="status-dot" style="width: 8px; height: 8px; background: var(--accent-green); border-radius: 50%;"></span>
+        Online • Net-Zero Verified
+      </div>
+    </div>
+  </div>
+
+  <!-- High-Tech Toast Notification -->
+  <div class="civic-toast" id="civic-toast">
+    <i class="fa-solid fa-circle-check text-green"></i>
+    <span id="toast-text">System Updated</span>
+  </div>
+
+  <!-- Back to Top Floating Button -->
+  <button class="back-to-top-btn" id="back-to-top" title="Scroll to Top" aria-label="Scroll to Top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- =========================================================================
+       1. NAVIGATION HEADER
+       ========================================================================= -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="#hero" class="brand-logo" id="nav-brand-link">
+        <img src="assets/logo.png" alt="A Smarter Tomorrow Logo" class="brand-logo-img">
+        <div class="brand-info">
+          <span class="brand-name">SMARTER<span class="text-cyan">TOMORROW</span></span>
+          <span class="brand-sub">Civic Ecosystem</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="#hero" class="nav-link active">Vision</a></li>
+          <li><a href="#blueprint" class="nav-link">Blueprint Explorer</a></li>
+          <li><a href="#pillars" class="nav-link">5 Core Pillars</a></li>
+          <li><a href="#ecosystem" class="nav-link">Infinity Ecosystem</a></li>
+          <li><a href="#calculator" class="nav-link">Impact Calculator</a></li>
+          <li><a href="#gallery" class="nav-link">Gallery</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Sound FX Toggle -->
+        <button class="icon-btn" id="sound-toggle-btn" title="Toggle UI Sound Effects" aria-label="Toggle Sound">
+          <i class="fa-solid fa-volume-high" id="sound-icon"></i>
+        </button>
+
+        <!-- Theme Switcher -->
+        <button class="icon-btn" id="theme-toggle-btn" title="Switch Theme (Cyber / Solar / Matrix)" aria-label="Toggle Theme">
+          <i class="fa-solid fa-palette"></i>
+        </button>
+
+        <!-- Quick CTA -->
+        <a href="#blueprint" class="btn-primary" style="display: none; @media(min-width: 900px){display: inline-flex;}">
+          <i class="fa-solid fa-crosshairs"></i>
+          <span>Blueprint</span>
+        </a>
+
+        <!-- Mobile Hamburger Button -->
+        <button class="mobile-nav-toggle icon-btn" id="mobile-nav-toggle" aria-label="Open Navigation Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       2. HERO SECTION
+       ========================================================================= -->
+  <section class="hero-section" id="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="status-dot"></span>
+          <span>CIVIC NEURAL PLATFORM • LIVE TELEMETRY</span>
+        </div>
+
+        <h1 class="hero-title">
+          A SMARTER <br>
+          <span class="gradient-text animate-glow-text">TOMORROW</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Where people, technology, and nature thrive in continuous harmony. Discover the interconnected urban framework powering cleaner, human-centric, and sustainable civil life.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="#blueprint" class="btn-primary">
+            <i class="fa-solid fa-satellite-dish"></i>
+            <span>Interactive Poster Explorer</span>
+          </a>
+          <a href="#pillars" class="btn-secondary">
+            <i class="fa-solid fa-cubes"></i>
+            <span>Discover The 5 Pillars</span>
+          </a>
+        </div>
+
+        <!-- 5 Pillars Tag Chips -->
+        <div class="hero-pills">
+          <a href="#pillars" class="pillar-chip"><i class="fa-solid fa-solar-panel text-cyan"></i> Clean Energy</a>
+          <a href="#pillars" class="pillar-chip"><i class="fa-solid fa-building-columns text-green"></i> Smart Living</a>
+          <a href="#pillars" class="pillar-chip"><i class="fa-solid fa-train-subway text-cyan"></i> Seamless Mobility</a>
+          <a href="#pillars" class="pillar-chip"><i class="fa-solid fa-droplet text-green"></i> Resource Efficiency</a>
+          <a href="#pillars" class="pillar-chip"><i class="fa-solid fa-robot text-purple"></i> Automated Systems</a>
+        </div>
+      </div>
+
+      <!-- Hero Poster Showcase Frame -->
+      <div class="hero-poster-frame">
+        <div class="poster-inner-wrapper">
+          <img src="assets/poster.png" alt="A Smarter Tomorrow Master Concept Poster" class="hero-poster-img">
+          <div class="poster-glass-overlay">
+            <div class="overlay-info">
+              <h4>Master Blueprint 2030</h4>
+              <p>People • Technology • Nature</p>
+            </div>
+            <a href="#blueprint" class="btn-primary" style="padding: 0.5rem 1rem; font-size: 0.8rem;">
+              <i class="fa-solid fa-magnifying-glass-plus"></i> Inspect
+            </a>
+          </div>
+        </div>
+        <div class="floating-eco-badge">
+          <i class="fa-solid fa-leaf"></i> 100% Net Zero Ecosystem
+        </div>
+        <div class="floating-tech-badge">
+          <i class="fa-solid fa-network-wired"></i> IoT Cloud Linked
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       3. LIVE TELEMETRY BAR
+       ========================================================================= -->
+  <div class="telemetry-bar">
+    <div class="container telemetry-grid">
+      <div class="telemetry-card eco">
+        <div class="telemetry-icon-box"><i class="fa-solid fa-solar-panel"></i></div>
+        <div>
+          <div class="telemetry-value" id="telemetry-grid-val">98.4%</div>
+          <div class="telemetry-label">Renewable Grid Load</div>
+        </div>
+      </div>
+
+      <div class="telemetry-card">
+        <div class="telemetry-icon-box"><i class="fa-solid fa-smog"></i></div>
+        <div>
+          <div class="telemetry-value" id="telemetry-carbon-val">0.0 g</div>
+          <div class="telemetry-label">Net Carbon Emission</div>
+        </div>
+      </div>
+
+      <div class="telemetry-card eco">
+        <div class="telemetry-icon-box"><i class="fa-solid fa-water"></i></div>
+        <div>
+          <div class="telemetry-value" id="telemetry-water-val">2.4M L</div>
+          <div class="telemetry-label">Daily Recycled Water</div>
+        </div>
+      </div>
+
+      <div class="telemetry-card purple">
+        <div class="telemetry-icon-box"><i class="fa-solid fa-bolt"></i></div>
+        <div>
+          <div class="telemetry-value" id="telemetry-transit-val">2.1s</div>
+          <div class="telemetry-label">Transit Commute Latency</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       4. INTERACTIVE BLUEPRINT & POSTER EXPLORER (HOTSPOTS)
+       ========================================================================= -->
+  <section class="section-wrapper blueprint-section" id="blueprint">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag"><i class="fa-solid fa-crosshairs"></i> Deep-Dive Architecture</div>
+        <h2 class="section-title">Interactive <span class="gradient-text">Blueprint Explorer</span></h2>
+        <p class="section-desc">Click any pulsing marker on the Master Vision Poster to reveal architectural schematics, engineering metrics, and ecological subsystems.</p>
+      </div>
+
+      <div class="blueprint-layout">
+        <!-- Interactive Poster Image with Hotspot Pins -->
+        <div class="interactive-canvas-container">
+          <img src="assets/poster.png" alt="Interactive Urban Poster" class="blueprint-main-img">
+
+          <!-- Hotspot Pin 1: Solar Facades (Top Right) -->
+          <button class="hotspot-pin active" style="top: 8%; left: 88%;" data-hotspot="solar" title="Solar Facades & Rooftop Solar">
+            <i class="fa-solid fa-solar-panel"></i>
+            <span class="hotspot-tooltip">Solar Facades & Rooftop Solar</span>
+          </button>
+
+          <!-- Hotspot Pin 2: Modular Living (Top Left) -->
+          <button class="hotspot-pin pin-green" style="top: 20%; left: 24%;" data-hotspot="living" title="Modular & Adaptable Living Spaces">
+            <i class="fa-solid fa-house-chimney"></i>
+            <span class="hotspot-tooltip">Modular & Adaptable Living</span>
+          </button>
+
+          <!-- Hotspot Pin 3: Metro & Sky Mobility (Mid Right) -->
+          <button class="hotspot-pin" style="top: 30%; left: 88%;" data-hotspot="mobility" title="Metro & Urban Mobility">
+            <i class="fa-solid fa-train-subway"></i>
+            <span class="hotspot-tooltip">Metro & Sky Mobility</span>
+          </button>
+
+          <!-- Hotspot Pin 4: Rainwater Waterfall (Mid Left) -->
+          <button class="hotspot-pin pin-green" style="top: 55%; left: 12%;" data-hotspot="water" title="Rainwater Harvesting & Recycling">
+            <i class="fa-solid fa-droplet"></i>
+            <span class="hotspot-tooltip">Rainwater Cascades</span>
+          </button>
+
+          <!-- Hotspot Pin 5: Underground Logistics (Mid Lower Right) -->
+          <button class="hotspot-pin" style="top: 64%; left: 86%;" data-hotspot="logistics" title="Automated Goods Storage & Distribution">
+            <i class="fa-solid fa-dolly"></i>
+            <span class="hotspot-tooltip">Automated Logistics & AGVs</span>
+          </button>
+
+          <!-- Hotspot Pin 6: Underground Transport Network (Bottom Right) -->
+          <button class="hotspot-pin" style="top: 86%; left: 82%;" data-hotspot="transit_tube" title="Underground Transport Network">
+            <i class="fa-solid fa-bolt-lightning"></i>
+            <span class="hotspot-tooltip">Underground High-Speed Tube</span>
+          </button>
+        </div>
+
+        <!-- Sidebar Details Panel -->
+        <div class="blueprint-detail-card">
+          <div class="blueprint-tag" id="blueprint-category">Clean Energy</div>
+          <h3 class="blueprint-detail-title" id="blueprint-title">Solar Facades & Rooftop Solar</h3>
+          <p class="blueprint-detail-desc" id="blueprint-desc">
+            BIPV engineered directly into skyscraper glass facades and multi-tiered rooftop gardens, converting 360-degree daylight into clean, localized urban power with zero emissions.
+          </p>
+
+          <ul class="blueprint-specs-list" id="blueprint-specs">
+            <!-- Populated via hotspots.js -->
+          </ul>
+
+          <button class="btn-primary" id="blueprint-jump-btn" style="width: 100%; justify-content: center;">
+            <i class="fa-solid fa-sliders"></i> Open Dedicated Pillar Simulator
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       5. THE 5 CORE PILLARS SHOWCASE & INTERACTIVE SIMULATORS
+       ========================================================================= -->
+  <section class="section-wrapper" id="pillars">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag"><i class="fa-solid fa-cubes-stacked"></i> The Core Framework</div>
+        <h2 class="section-title">The <span class="gradient-text">5 Fundamental Pillars</span></h2>
+        <p class="section-desc">Every subsystem within A Smarter Tomorrow operates as a synchronized ecosystem. Explore how each keyword transforms urban civilization.</p>
+      </div>
+
+      <!-- Pillar Tab Switcher -->
+      <div class="pillars-tab-nav">
+        <button class="pillar-tab-btn active" data-target="clean-energy">
+          <i class="fa-solid fa-solar-panel"></i> 1. Clean Energy
+        </button>
+        <button class="pillar-tab-btn" data-target="smart-living">
+          <i class="fa-solid fa-seedling"></i> 2. Smart Living
+        </button>
+        <button class="pillar-tab-btn" data-target="seamless-mobility">
+          <i class="fa-solid fa-train"></i> 3. Seamless Mobility
+        </button>
+        <button class="pillar-tab-btn" data-target="resource-efficiency">
+          <i class="fa-solid fa-droplet"></i> 4. Resource Efficiency
+        </button>
+        <button class="pillar-tab-btn" data-target="automated-systems">
+          <i class="fa-solid fa-robot"></i> 5. Automated Systems
+        </button>
+      </div>
+
+      <!-- PILLAR 1: CLEAN ENERGY -->
+      <div class="pillar-panel active" id="clean-energy">
+        <div class="pillar-grid">
+          <div class="pillar-visual-card">
+            <img src="assets/clean_energy.jpg" alt="Clean Energy Architecture" class="pillar-visual-img">
+            <span class="pillar-visual-tag"><i class="fa-solid fa-sun text-amber"></i> 100% Photovoltaic Skin</span>
+          </div>
+
+          <div class="pillar-content-box">
+            <span class="pillar-badge-inline"><i class="fa-solid fa-bolt"></i> Zero-Carbon Power Grid</span>
+            <h3 class="pillar-title">Photovoltaic Facades & Micro-Grids</h3>
+            <p class="pillar-desc">
+              Every vertical surface acts as an active energy generator. High-efficiency Building-Integrated Photovoltaics (BIPV) capture diffuse sunlight, while kinetic footpaths and rooftop wind turbines continuously feed decentralised solid-state battery banks.
+            </p>
+
+            <div class="features-mini-grid">
+              <div class="feature-mini-card">
+                <h5><i class="fa-solid fa-microchip text-cyan"></i> Smart Inverters</h5>
+                <p>AI grid balancing prevents peak-load brownouts with sub-millisecond switching.</p>
+              </div>
+              <div class="feature-mini-card">
+                <h5><i class="fa-solid fa-battery-full text-green"></i> Deep Storage</h5>
+                <p>Underground graphene battery buffers store 72 hours of baseline emergency capacity.</p>
+              </div>
+            </div>
+
+            <!-- Clean Energy Simulator -->
+            <div class="simulator-widget">
+              <div class="simulator-header">
+                <span class="sim-title"><i class="fa-solid fa-sliders"></i> Solar Generation Simulator</span>
+                <span class="text-cyan font-mono" id="sun-angle-text">60°</span>
+              </div>
+              <div class="sim-control-group">
+                <div class="range-slider-wrap">
+                  <div class="range-label-row">
+                    <span>Sun Elevation Angle</span>
+                    <span>Direct Daylight</span>
+                  </div>
+                  <input type="range" min="10" max="90" value="60" class="custom-range" id="solar-sun-angle">
+                </div>
+                <div class="range-slider-wrap">
+                  <div class="range-label-row">
+                    <span>Cloud Density Filter</span>
+                    <span id="cloud-cover-text">15%</span>
+                  </div>
+                  <input type="range" min="0" max="100" value="15" class="custom-range" id="solar-cloud-cover">
+                </div>
+              </div>
+              <div class="sim-metrics-row">
+                <div class="sim-metric-box">
+                  <div class="sim-metric-num" id="solar-output-val">10.8 MW</div>
+                  <div class="sim-metric-lbl">Power Output</div>
+                </div>
+                <div class="sim-metric-box">
+                  <div class="sim-metric-num" id="solar-carbon-val">8.4 T/h</div>
+                  <div class="sim-metric-lbl">CO2 Avoided</div>
+                </div>
+                <div class="sim-metric-box">
+                  <div class="sim-metric-num" id="solar-battery-val">84%</div>
+                  <div class="sim-metric-lbl">Grid Buffer</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PILLAR 2: SMART LIVING -->
+      <div class="pillar-panel" id="smart-living">
+        <div class="pillar-grid">
+          <div class="pillar-visual-card">
+            <img src="assets/smart_living.jpg" alt="Smart Biophilic Living" class="pillar-visual-img">
+            <span class="pillar-visual-tag"><i class="fa-solid fa-leaf text-green"></i> Biophilic Adaptable Spaces</span>
+          </div>
+
+          <div class="pillar-content-box">
+            <span class="pillar-badge-inline"><i class="fa-solid fa-house-laptop"></i> Human-Centric Habitats</span>
+            <h3 class="pillar-title">Modular & Biophilic Architecture</h3>
+            <p class="pillar-desc">
+              Homes engineered to adapt seamlessly around the human lifecycle. Living spaces combine active vertical indoor flora that filter airborne particulates with kinetic walls that reconfigure rooms from workspace to sanctuary within seconds.
+            </p>
+
+            <div class="features-mini-grid">
+              <div class="feature-mini-card">
+                <h5><i class="fa-solid fa-wind text-green"></i> Air Purification</h5>
+                <p>Continuous biophilic transpiration maintains pristine mountain-fresh indoor air.</p>
+              </div>
+              <div class="feature-mini-card">
+                <h5><i class="fa-solid fa-layer-group text-cyan"></i> Kinetic Geometry</h5>
+                <p>Robotic internal partitions fold seamlessly to maximize usable square footage.</p>
+              </div>
+            </div>
+
+            <!-- Living Mode Simulator -->
+            <div class="simulator-widget">
+              <div class="simulator-header">
+                <span class="sim-title"><i class="fa-solid fa-wand-magic-sparkles"></i> Adaptive Living Space Mode</span>
+              </div>
+              <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                <button class="pillar-chip living-mode-btn active" data-mode="work">💼 Work / Focus</button>
+                <button class="pillar-chip living-mode-btn" data-mode="sanctuary">🌿 Sanctuary / Rest</button>
+                <button class="pillar-chip living-mode-btn" data-mode="family">👨‍👩‍👧 Social / Open</button>
+              </div>
+              <h5 id="living-mode-title" style="color: var(--accent-cyan); margin-bottom: 0.3rem;">Active Work & Collaboration Mode</h5>
+              <p id="living-mode-desc" style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                Smart biophilic partitions deploy acoustic dampeners, daylight harvesting optimizes focus spectrum (5500K), and dual workstation modules slide into position.
+              </p>
+              <div class="sim-metrics-row">
+                <div class="sim-metric-box">
+                  <div class="sim-metric-num" id="living-aqi">12 (Pristine)</div>
+                  <div class="sim-metric-lbl">Indoor AQI</div>
+                </div>
+                <div class="sim-metric-box">
+                  <div class="sim-metric-num" id="living-acoustic">-38 dB</div>
+                  <div class="sim-metric-lbl">Acoustic Shield</div>
+                </div>
+                <div class="sim-metric-box">
+                  <div class="sim-metric-num" id="living-energy">0.18 kWh</div>
+                  <div class="sim-metric-lbl">Active Power</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PILLAR 3: SEAMLESS MOBILITY -->
+      <div class="pillar-panel" id="seamless-mobility">
+        <div class="pillar-grid">
+          <div class="pillar-visual-card">
+            <img src="assets/seamless_mobility.jpg" alt="Seamless Urban Mobility" class="pillar-visual-img">
+            <span class="pillar-visual-tag"><i class="fa-solid fa-gauge-high text-cyan"></i> Multi-Tiered Transit</span>
+          </div>
+
+          <div class="pillar-content-box">
+            <span class="pillar-badge-inline"><i class="fa-solid fa-route"></i> Frictionless Transit</span>
+            <h3 class="pillar-title">Sky-Rails & Sub-Terrene Tubes</h3>
+            <p class="pillar-desc">
+              Separating urban movement into three non-conflicting tiers: elevated panoramic magnetic sky-rails for neighborhood transit, pedestrianized green streets for autonomous electric pods, and subterranean vacuum tubes for ultra-fast intercity transit.
+            </p>
+
+            <div class="features-mini-grid">
+              <div class="feature-mini-card">
+                <h5><i class="fa-solid fa-train-tram text-cyan"></i> Elevated Maglev</h5>
+                <p>Whisper-quiet magnetic levitation eliminates track wear and acoustic disturbance.</p>
+              </div>
+              <div class="feature-mini-card">
+                <h5><i class="fa-solid fa-person-walking text-green"></i> 100% Walkable Ground</h5>
+                <p>Surface streets prioritize nature, children, cyclists, and community gatherings.</p>
+              </div>
+            </div>
+
+            <!-- Transit Route Comparator -->
+            <div class="simulator-widget">
+              <div class="simulator-header">
+                <span class="sim-title"><i class="fa-solid fa-map-location-dot"></i> Multi-Tier Transit Route Planner</span>
+              </div>
+              <div style="margin-bottom: 1rem;">
+                <label style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 0.3rem;">Select Destination Sector:</label>
+                <select id="mobility-dest-select" style="width: 100%; padding: 0.6rem; border-radius: var(--radius-sm); background: rgba(0,0,0,0.4); border: 1px solid var(--border-bright); color: #fff; outline: none;">
+                  <option value="hub">Central Civic Hub (Sector 1)</option>
+                  <option value="eco_district">Cascading Water Botanical District (Sector 4)</option>
+                  <option value="sky_terrace">Solar Sky Terrace Gardens (Sector 7)</option>
+                </select>
+              </div>
+              <div class="sim-metrics-row">
+                <div class="sim-metric-box">
+                  <div class="sim-metric-num" id="transit-sky-time">3 min</div>
+                  <div class="sim-metric-lbl">Sky-Rail Maglev</div>
+                </div>
+                <div class="sim-metric-box">
+                  <div class="sim-metric-num" id="transit-tube-time">1.5 min</div>
+                  <div class="sim-metric-lbl">Sub-terrene Tube</div>
+                </div>
+                <div class="sim-metric-box">
+                  <div class="sim-metric-num" id="transit-co2-saved">98% Saved</div>
+                  <div class="sim-metric-lbl">Carbon Reduction</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PILLAR 4: RESOURCE EFFICIENCY -->
+      <div class="pillar-panel" id="resource-efficiency">
+        <div class="pillar-grid">
+          <div class="pillar-visual-card">
+            <img src="assets/resource_efficiency.jpg" alt="Rainwater Harvesting Cascades" class="pillar-visual-img">
+            <span class="pillar-visual-tag"><i class="fa-solid fa-droplet text-cyan"></i> Closed-Loop Hydrology</span>
+          </div>
+
+          <div class="pillar-content-box">
+            <span class="pillar-badge-inline"><i class="fa-solid fa-recycle"></i> Circular Hydrological Loop</span>
+            <h3 class="pillar-title">Cascading Waterfalls & Natural Aquifers</h3>
+            <p class="pillar-desc">
+              Every drop of stormwater is intercepted by stepped botanical terraces and scenic waterfalls that naturally aerate and cleanse the water before feeding subterranean biological treatment caverns, ensuring 0% water wastage across the metropolis.
+            </p>
+
+            <div class="features-mini-grid">
+              <div class="feature-mini-card">
+                <h5><i class="fa-solid fa-water-ladder text-cyan"></i> Gravity Cascade</h5>
+                <p>Zero-energy gravity filtration systems channel urban runoff through wetland reeds.</p>
+              </div>
+              <div class="feature-mini-card">
+                <h5><i class="fa-solid fa-shield-halved text-green"></i> Flood Resilience</h5>
+                <p>Deep aquifer reservoirs can absorb 500-year storm deluges without surface flooding.</p>
+              </div>
+            </div>
+
+            <!-- Hydrological Flow Simulator -->
+            <div class="simulator-widget">
+              <div class="simulator-header">
+                <span class="sim-title"><i class="fa-solid fa-cloud-showers-heavy"></i> Stormwater Recycling Simulator</span>
+                <span class="text-cyan font-mono" id="rain-intensity-text">40 mm/h</span>
+              </div>
+              <div class="sim-control-group">
+                <div class="range-slider-wrap">
+                  <div class="range-label-row">
+                    <span>Precipitation Volume</span>
+                    <span>Simulated Rainfall</span>
+                  </div>
+                  <input type="range" min="10" max="100" value="40" class="custom-range" id="rain-intensity-slider">
+                </div>
+              </div>
+              <div class="sim-metrics-row">
+                <div class="sim-metric-box">
+                  <div class="sim-metric-num" id="water-harvested-val">1,920,000 L</div>
+                  <div class="sim-metric-lbl">Captured Today</div>
+                </div>
+                <div class="sim-metric-box">
+                  <div class="sim-metric-num" id="water-purity-val">98.5%</div>
+                  <div class="sim-metric-lbl">Purity Rating</div>
+                </div>
+                <div class="sim-metric-box">
+                  <div class="sim-metric-num" id="water-capacity-val">72%</div>
+                  <div class="sim-metric-lbl">Aquifer Level</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PILLAR 5: AUTOMATED SYSTEMS -->
+      <div class="pillar-panel" id="automated-systems">
+        <div class="pillar-grid">
+          <div class="pillar-visual-card">
+            <img src="assets/automated_systems.jpg" alt="Subterranean AGV Logistics" class="pillar-visual-img">
+            <span class="pillar-visual-tag"><i class="fa-solid fa-network-wired text-purple"></i> Sub-Surface AGV Network</span>
+          </div>
+
+          <div class="pillar-content-box">
+            <span class="pillar-badge-inline"><i class="fa-solid fa-gears"></i> Subterranean Robotics</span>
+            <h3 class="pillar-title">Subterranean AGV Logistics & Fiber Conduits</h3>
+            <p class="pillar-desc">
+              Moving commercial freight, waste processing, and utility grids entirely subterranean. Thousands of autonomous robotic AGV pods navigate illuminated fiber-optic tunnels, delivering packages directly to skyscraper basements in minutes.
+            </p>
+
+            <div class="features-mini-grid">
+              <div class="feature-mini-card">
+                <h5><i class="fa-solid fa-truck-ramp-box text-cyan"></i> Zero Truck Traffic</h5>
+                <p>Surface streets remain 100% free of noisy, hazardous freight and delivery vans.</p>
+              </div>
+              <div class="feature-mini-card">
+                <h5><i class="fa-solid fa-bolt text-green"></i> Combined Conduits</h5>
+                <p>High-voltage power, recycled water, and optical data run in unified access vaults.</p>
+              </div>
+            </div>
+
+            <!-- AGV Dispatcher Simulator -->
+            <div class="simulator-widget">
+              <div class="simulator-header">
+                <span class="sim-title"><i class="fa-solid fa-microchip"></i> AGV Subterranean Fleet Controller</span>
+                <button class="btn-primary" id="agv-dispatch-btn" style="padding: 0.35rem 0.8rem; font-size: 0.8rem;">
+                  <i class="fa-solid fa-paper-plane"></i> Dispatch Pod
+                </button>
+              </div>
+              <div id="agv-delivery-status" style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 0.8rem;">
+                System Ready: Sub-terrene AGV logistics corridors operating at optimal throughput.
+              </div>
+              <div class="sim-metrics-row">
+                <div class="sim-metric-box">
+                  <div class="sim-metric-num" id="agv-active-val">142</div>
+                  <div class="sim-metric-lbl">Active AGVs</div>
+                </div>
+                <div class="sim-metric-box">
+                  <div class="sim-metric-num" id="agv-queue-val">8</div>
+                  <div class="sim-metric-lbl">Pending Drops</div>
+                </div>
+                <div class="sim-metric-box">
+                  <div class="sim-metric-num">9.8 min</div>
+                  <div class="sim-metric-lbl">Avg Fulfillment</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       6. INFINITY ECOSYSTEM ARCHITECTURE (LOGO CONCEPT EXPLAINER)
+       ========================================================================= -->
+  <section class="section-wrapper ecosystem-section" id="ecosystem">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag"><i class="fa-solid fa-infinity"></i> The Symbology Behind The Logo</div>
+        <h2 class="section-title">The <span class="gradient-text">Infinity Loop Ecosystem</span></h2>
+        <p class="section-desc">Our brand identity reflects the perpetual, unbroken cycle of energy, data, resources, and community life.</p>
+      </div>
+
+      <div class="ecosystem-grid">
+        <div class="ecosystem-logo-visual">
+          <img src="assets/logo.png" alt="A Smarter Tomorrow Infinity Ecosystem Logo" class="logo-main-display">
+        </div>
+
+        <div class="loop-nodes-list">
+          <div class="loop-node-item">
+            <div class="node-num">01</div>
+            <div class="node-info">
+              <h4>The Cloud Contour (Decentralized Intelligence)</h4>
+              <p>Represents the omnipresent neural cloud layer synchronizing municipal micro-grids, environmental sensors, and autonomous transportation in real time.</p>
+            </div>
+          </div>
+
+          <div class="loop-node-item">
+            <div class="node-num">02</div>
+            <div class="node-info">
+              <h4>The Infinity Loop (Closed-Cycle Sustainability)</h4>
+              <p>Signifies zero waste: clean solar energy powers automated water filtration, which nourishes biophilic living spaces, with every resource continuously recycled.</p>
+            </div>
+          </div>
+
+          <div class="loop-node-item">
+            <div class="node-num">03</div>
+            <div class="node-info">
+              <h4>The Dual-Horizon Strata (Sky & Sub-Terrene)</h4>
+              <p>Illustrates the separation of noisy logistics beneath the ground to liberate surface space for clean air, public parks, children, and thriving nature above.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       7. CITIZEN IMPACT CALCULATOR
+       ========================================================================= -->
+  <section class="section-wrapper" id="calculator">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag"><i class="fa-solid fa-calculator"></i> Personal Impact</div>
+        <h2 class="section-title">Simulate Your <span class="gradient-text">Smart City Footprint</span></h2>
+        <p class="section-desc">See how living within A Smarter Tomorrow transforms your personal ecological footprint and energy independence.</p>
+      </div>
+
+      <div class="calculator-card">
+        <div class="calc-grid">
+          <!-- Inputs -->
+          <div class="sim-control-group">
+            <div class="range-slider-wrap">
+              <div class="range-label-row">
+                <span>Household Size</span>
+                <span id="calc-people-lbl">2 Residents</span>
+              </div>
+              <input type="range" min="1" max="6" value="2" class="custom-range" id="calc-household">
+            </div>
+
+            <div class="range-slider-wrap">
+              <div class="range-label-row">
+                <span>Rooftop Solar & Micro-Grid Allocation</span>
+                <span id="calc-solar-lbl">80% Clean</span>
+              </div>
+              <input type="range" min="20" max="100" value="80" class="custom-range" id="calc-solar-pct">
+            </div>
+
+            <div>
+              <label style="font-size: 0.85rem; color: var(--text-secondary); display: block; margin-bottom: 0.4rem;">Primary Commute Mode</label>
+              <select id="calc-transit" style="width: 100%; padding: 0.8rem; border-radius: var(--radius-sm); background: rgba(0,0,0,0.4); border: 1px solid var(--border-bright); color: #fff; outline: none;">
+                <option value="maglev">Elevated Sky-Rail Maglev (Zero-Emission)</option>
+                <option value="shuttle">Autonomous Pedestrian Shuttle</option>
+                <option value="hybrid">Active Cycling & Walking Path</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Results Output Gauge -->
+          <div class="calc-results-panel">
+            <div class="calc-circle-gauge">
+              <span class="gauge-pct" id="calc-result-score">94%</span>
+              <span class="gauge-lbl">Eco Score</span>
+            </div>
+            <h4>Net-Zero Citizen Status</h4>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Your lifestyle generates more clean power than it consumes!</p>
+
+            <div class="calc-stat-cards">
+              <div class="calc-stat-pill">
+                <h4 id="calc-result-co2">3.8 T</h4>
+                <span>CO2 Offset / Year</span>
+              </div>
+              <div class="calc-stat-pill">
+                <h4 id="calc-result-trees">171</h4>
+                <span>Trees Planted Equiv.</span>
+              </div>
+              <div class="calc-stat-pill">
+                <h4 id="calc-result-water">2,499 L</h4>
+                <span>Water Recycled / Mo</span>
+              </div>
+              <div class="calc-stat-pill">
+                <h4 id="calc-result-self">80%</h4>
+                <span>Self-Sufficiency</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       8. VISUAL GALLERY & LIGHTBOX
+       ========================================================================= -->
+  <section class="section-wrapper" id="gallery">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag"><i class="fa-solid fa-images"></i> Visual Showcase</div>
+        <h2 class="section-title">Architectural <span class="gradient-text">Concept Gallery</span></h2>
+        <p class="section-desc">Click any preview to inspect high-resolution renderings of our poster, brand logo, and urban design schematics.</p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-card" data-image="assets/poster.png" data-title="A Smarter Tomorrow Master Poster" data-desc="The foundational blueprint integrating people, technology, and nature in harmony.">
+          <img src="assets/poster.png" alt="Master Poster" class="gallery-thumb">
+          <div class="gallery-overlay">
+            <div class="gallery-title">Master Poster Concept</div>
+            <div class="gallery-subtitle">Round 1 Blueprint Original</div>
+          </div>
+        </div>
+
+        <div class="gallery-card" data-image="assets/logo.png" data-title="Infinity Ecosystem Brand Logo" data-desc="The cloud infinity loop representing perpetual smart city circularity.">
+          <img src="assets/logo.png" alt="Brand Logo" class="gallery-thumb" style="object-fit: contain; background: radial-gradient(circle at center, rgba(0, 210, 255, 0.15), rgba(6, 12, 22, 0.9)); padding: 1.2rem;">
+          <div class="gallery-overlay">
+            <div class="gallery-title">Ecosystem Brand Logo</div>
+            <div class="gallery-subtitle">Transparent Vector-Grade PNG</div>
+          </div>
+        </div>
+
+        <div class="gallery-card" data-image="assets/clean_energy.jpg" data-title="Solar Facades & Clean Energy" data-desc="Architectural detail of building-integrated photovoltaic glass facades.">
+          <img src="assets/clean_energy.jpg" alt="Solar Facades" class="gallery-thumb">
+          <div class="gallery-overlay">
+            <div class="gallery-title">Clean Energy Facades</div>
+            <div class="gallery-subtitle">Renewable Urban Skin</div>
+          </div>
+        </div>
+
+        <div class="gallery-card" data-image="assets/smart_living.jpg" data-title="Modular Biophilic Living" data-desc="Reconfigurable residential spaces with vertical living flora.">
+          <img src="assets/smart_living.jpg" alt="Modular Living" class="gallery-thumb">
+          <div class="gallery-overlay">
+            <div class="gallery-title">Smart Living Modules</div>
+            <div class="gallery-subtitle">Biophilic Residential</div>
+          </div>
+        </div>
+
+        <div class="gallery-card" data-image="assets/seamless_mobility.jpg" data-title="Multi-Tier Seamless Mobility" data-desc="Elevated maglev sky-rails and quiet pedestrian streetscapes.">
+          <img src="assets/seamless_mobility.jpg" alt="Seamless Mobility" class="gallery-thumb">
+          <div class="gallery-overlay">
+            <div class="gallery-title">Seamless Mobility</div>
+            <div class="gallery-subtitle">Sky-Rail & Vacuum Tube</div>
+          </div>
+        </div>
+
+        <div class="gallery-card" data-image="assets/resource_efficiency.jpg" data-title="Rainwater Cascades & Bio-Filtration" data-desc="Closed-loop hydrological treatment waterfalls and aquifers.">
+          <img src="assets/resource_efficiency.jpg" alt="Resource Efficiency" class="gallery-thumb">
+          <div class="gallery-overlay">
+            <div class="gallery-title">Resource Efficiency</div>
+            <div class="gallery-subtitle">Rainwater Bio-Filtration</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       9. GALLERY LIGHTBOX MODAL
+       ========================================================================= -->
+  <div class="modal-overlay" id="gallery-modal">
+    <div class="modal-content">
+      <button class="modal-close-btn" id="modal-close"><i class="fa-solid fa-xmark"></i></button>
+      <img src="" alt="High-Res Inspection" class="modal-img" id="modal-img">
+      <div class="modal-info">
+        <h3 id="modal-title" style="margin-bottom: 0.4rem; color: #fff;"></h3>
+        <p id="modal-desc" style="color: var(--text-secondary);"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       10. FOOTER
+       ========================================================================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#hero" class="brand-logo">
+            <img src="assets/logo.png" alt="A Smarter Tomorrow Logo" class="brand-logo-img">
+            <div class="brand-info">
+              <span class="brand-name">SMARTER<span class="text-cyan">TOMORROW</span></span>
+              <span class="brand-sub">Civic Ecosystem</span>
+            </div>
+          </a>
+          <p>
+            An interactive blueprint synthesizing Clean Energy, Smart Living, Seamless Mobility, Resource Efficiency, and Automated Systems into one harmonious future.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>The 5 Pillars</h4>
+          <ul class="footer-links">
+            <li><a href="#pillars" class="footer-link">⚡ Clean Energy</a></li>
+            <li><a href="#pillars" class="footer-link">🏢 Smart Living</a></li>
+            <li><a href="#pillars" class="footer-link">🚄 Seamless Mobility</a></li>
+            <li><a href="#pillars" class="footer-link">💧 Resource Efficiency</a></li>
+            <li><a href="#pillars" class="footer-link">🤖 Automated Systems</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Interactive Tools</h4>
+          <ul class="footer-links">
+            <li><a href="#blueprint" class="footer-link">Interactive Blueprint</a></li>
+            <li><a href="#calculator" class="footer-link">Impact Calculator</a></li>
+            <li><a href="#ecosystem" class="footer-link">Infinity Symbology</a></li>
+            <li><a href="#gallery" class="footer-link">Asset Showcase</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Ecosystem Status</h4>
+          <div style="display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.5rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--accent-green);">
+              <span class="status-dot" style="width: 8px; height: 8px; background: var(--accent-green); border-radius: 50%; box-shadow: 0 0 8px var(--accent-green);"></span>
+              <span>All Systems Operational</span>
+            </div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);">
+              Decentralized Mesh v2.4 • Net Zero Verified
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 A Smarter Tomorrow. Built with high precision for Round 2 Frontend Showcase.
+        </div>
+        <div>
+          <span>PEOPLE</span> • <span>TECHNOLOGY</span> • <span>NATURE IN HARMONY</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/sound.js"></script>
+  <script src="js/particles.js"></script>
+  <script src="js/hotspots.js"></script>
+  <script src="js/simulators.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
