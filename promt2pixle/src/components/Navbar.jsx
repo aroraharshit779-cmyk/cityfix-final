@@ -24,6 +24,7 @@ import {
   Globe
 } from 'lucide-react';
 import { sounds } from '../utils/audio';
+import cityFixLogo from '../assets/cityfix-logo.png';
 
 export const Navbar = ({
   activeTab,
@@ -77,7 +78,7 @@ export const Navbar = ({
             <div className="relative flex items-center justify-center w-11 h-9 group-hover:scale-105 transition-all">
               <div className="absolute inset-0 bg-cyan-400/20 blur-md rounded-full"></div>
               <img 
-                src="/cityfix-logo.png" 
+                src={cityFixLogo} 
                 alt="CityFix Cloud Infinity Logo" 
                 className="relative z-10 w-full h-full object-contain filter drop-shadow-[0_2px_10px_rgba(6,182,212,0.5)]"
               />

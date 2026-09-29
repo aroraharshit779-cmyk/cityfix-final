@@ -14,6 +14,7 @@ import { ScamAwarenessModal } from './components/ScamAwarenessModal';
 import { INITIAL_ISSUES } from './data/mockData';
 import { cloudStorage } from './services/cloudStorage';
 import { sounds } from './utils/audio';
+import cityFixLogo from './assets/cityfix-logo.png';
 
 const AUTH_KEY = 'cityfix_auth_user_v2';
 
@@ -339,7 +340,7 @@ export default function App() {
       <footer className="border-t border-slate-900 bg-slate-950/90 py-6 text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center space-x-2.5">
-            <img src="/cityfix-logo.png" alt="Logo" className="w-5 h-4 object-contain" />
+            <img src={cityFixLogo} alt="Logo" className="w-5 h-4 object-contain" />
             <span className="font-heading font-extrabold text-slate-200">CityFix</span>
             <span className="text-slate-400">• Enterprise Civic Governance & AI Resolution Platform</span>
           </div>
