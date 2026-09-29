@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { 
   ShieldCheck, 
   Clock, 
@@ -15,7 +15,8 @@ import {
   Eye, 
   ChevronRight,
   Filter,
-  SlidersHorizontal
+  SlidersHorizontal,
+  Image as ImageIcon
 } from 'lucide-react';
 import { DEPARTMENTS, STATUS_STAGES } from '../data/mockData';
 import { sounds } from '../utils/audio';
@@ -38,9 +39,28 @@ export const AuthorityPortal = ({
   // Proof-of-Work Closure Modal State (USP 3)
   const [powModalIssue, setPowModalIssue] = useState(null);
   const [afterImage, setAfterImage] = useState(AFTER_SAMPLE_PHOTOS[0].url);
+  const [customPowPhotoName, setCustomPowPhotoName] = useState('');
+  const powFileInputRef = useRef(null);
   const [workerName, setWorkerName] = useState('Eng. Vikramaditya (Lead Inspector)');
   const [workerId, setWorkerId] = useState('CREW-RID-884');
   const [resolutionNotes, setResolutionNotes] = useState('Excavated loose road rubble, filled sub-base, poured 80mm hot-mix bitumen and compacted with vibratory roller. Traffic open.');
+
+  const handlePowFileUpload = (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (!file.type.startsWith('image/')) {
+        alert("Please upload a valid image file");
+        return;
+      }
+      sounds.success();
+      setCustomPowPhotoName(file.name);
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setAfterImage(event.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   // Filter issues
   const filteredIssues = issues.filter((issue) => {
@@ -430,21 +450,56 @@ export const AuthorityPortal = ({
               </div>
 
               {/* Upload After Photo (USP 3 core requirement) */}
-              <div>
-                <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
-                  Upload "After" Resolution Photo *
-                </label>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider">
+                    Upload "After" Resolution Photo *
+                  </label>
+                  <span className="text-[10px] font-mono text-cyan-400">Mandatory Geo-Verification</span>
+                </div>
+
+                <input
+                  type="file"
+                  ref={powFileInputRef}
+                  accept="image/*"
+                  onChange={handlePowFileUpload}
+                  className="hidden"
+                />
+
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      sounds.click();
+                      powFileInputRef.current?.click();
+                    }}
+                    className="flex-1 py-2 px-3 rounded-xl bg-gradient-to-r from-cyan-950/60 to-blue-950/60 hover:from-cyan-900/60 hover:to-blue-900/60 border border-cyan-500/40 text-cyan-300 hover:text-white flex items-center justify-center space-x-2 text-xs font-bold shadow-md transition-all"
+                  >
+                    <Upload size={14} className="text-cyan-400" />
+                    <span>Upload Field Repair Photo from Device</span>
+                  </button>
+                </div>
+
+                {customPowPhotoName && (
+                  <p className="text-[10px] font-mono text-emerald-400 flex items-center gap-1">
+                    <Check size={12} /> Custom Photo Loaded: {customPowPhotoName}
+                  </p>
+                )}
 
                 {/* Sample selector */}
-                <div className="flex items-center gap-2 mb-2 overflow-x-auto pb-1">
-                  <span className="text-[11px] text-slate-400 whitespace-nowrap">Sample Proof:</span>
+                <div className="flex items-center gap-2 overflow-x-auto pb-1">
+                  <span className="text-[11px] text-slate-400 whitespace-nowrap">Or Sample Proof:</span>
                   {AFTER_SAMPLE_PHOTOS.map((item, idx) => (
                     <button
                       key={idx}
                       type="button"
-                      onClick={() => { sounds.click(); setAfterImage(item.url); }}
+                      onClick={() => { 
+                        sounds.click(); 
+                        setAfterImage(item.url); 
+                        setCustomPowPhotoName('');
+                      }}
                       className={`px-2 py-0.5 rounded text-[11px] font-medium whitespace-nowrap transition-all ${
-                        afterImage === item.url
+                        afterImage === item.url && !customPowPhotoName
                           ? 'bg-cyan-500 text-slate-950 font-bold'
                           : 'bg-slate-800 text-slate-400 hover:text-white'
                       }`}

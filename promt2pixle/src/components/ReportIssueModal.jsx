@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import confetti from 'canvas-confetti';
 import { 
   X, 
@@ -16,7 +16,9 @@ import {
   Clock, 
   Layers,
   HelpCircle,
-  AlertCircle
+  AlertCircle,
+  Image as ImageIcon,
+  Check
 } from 'lucide-react';
 import { DEPARTMENTS, WARDS } from '../data/mockData';
 import { detectDuplicateIssue } from '../services/duplicateDetection';
@@ -51,8 +53,50 @@ export const ReportIssueModal = ({
   const [lng, setLng] = useState(77.20655);
   const [address, setAddress] = useState('Outer Ring Road, Near Metro Gate 3');
   const [photoUrl, setPhotoUrl] = useState(SAMPLE_PHOTOS[0].url);
+  const [customPhotoName, setCustomPhotoName] = useState('');
+  const [isDragOver, setIsDragOver] = useState(false);
+  const fileInputRef = useRef(null);
   const [citizenName, setCitizenName] = useState(authUser?.name || 'Aarav Sharma');
   const [citizenPhone, setCitizenPhone] = useState(authUser?.contact || '+91 98765-43210');
+
+  // Handle Local File Upload
+  const handleFileUpload = (e) => {
+    const file = e.target.files?.[0];
+    processSelectedFile(file);
+  };
+
+  const processSelectedFile = (file) => {
+    if (!file) return;
+    if (!file.type.startsWith('image/')) {
+      alert("Please upload a valid image file (JPG, PNG, WEBP, etc.)");
+      return;
+    }
+    if (file.size > 12 * 1024 * 1024) {
+      alert("Please select an image smaller than 12MB");
+      return;
+    }
+
+    sounds.success();
+    setCustomPhotoName(file.name);
+    setIsScanningImage(true);
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      setPhotoUrl(event.target.result);
+      setTimeout(() => {
+        setIsScanningImage(false);
+      }, 600);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    setIsDragOver(false);
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      processSelectedFile(e.dataTransfer.files[0]);
+    }
+  };
 
   // Sync authUser data
   useEffect(() => {
@@ -501,23 +545,92 @@ export const ReportIssueModal = ({
             </div>
 
             {/* Photo Upload & AI Computer Vision Scan */}
-            <div>
-              <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
-                Issue Photograph (AI Vision Verification)
-              </label>
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider">
+                  Issue Photograph *
+                </label>
+                <span className="text-[10px] font-mono text-cyan-400">JPG, PNG, WEBP (Max 12MB)</span>
+              </div>
 
-              {/* Sample Photo Pickers for Hackathon convenience */}
-              <div className="flex items-center gap-2 mb-2 overflow-x-auto pb-1">
-                <span className="text-[11px] text-slate-400 whitespace-nowrap">Quick Photo:</span>
+              {/* Hidden Native File Input */}
+              <input 
+                type="file" 
+                ref={fileInputRef} 
+                accept="image/*" 
+                onChange={handleFileUpload} 
+                className="hidden" 
+              />
+
+              {/* Interactive Upload Dropzone & Action Bar */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    sounds.click();
+                    fileInputRef.current?.click();
+                  }}
+                  className="p-3 rounded-xl bg-gradient-to-r from-cyan-950/60 to-blue-950/60 hover:from-cyan-900/60 hover:to-blue-900/60 border border-cyan-500/40 hover:border-cyan-400 text-cyan-300 hover:text-white flex items-center justify-center space-x-2 text-xs font-bold transition-all shadow-md group"
+                >
+                  <Upload size={15} className="text-cyan-400 group-hover:-translate-y-0.5 transition-transform" />
+                  <span>Choose Photo from Device</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    sounds.click();
+                    fileInputRef.current?.click();
+                  }}
+                  className="p-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700/80 hover:border-slate-600 text-slate-300 hover:text-white flex items-center justify-center space-x-2 text-xs font-semibold transition-all"
+                >
+                  <Camera size={15} className="text-slate-400" />
+                  <span>Camera / Device Snap</span>
+                </button>
+              </div>
+
+              {/* Drag & Drop Visual Area */}
+              <div
+                onDragOver={(e) => {
+                  e.preventDefault();
+                  setIsDragOver(true);
+                }}
+                onDragLeave={() => setIsDragOver(false)}
+                onDrop={handleDrop}
+                onClick={() => fileInputRef.current?.click()}
+                className={`relative rounded-xl border-2 border-dashed p-3 text-center cursor-pointer transition-all ${
+                  isDragOver 
+                    ? 'border-cyan-400 bg-cyan-950/30' 
+                    : 'border-white/[0.1] hover:border-cyan-500/40 bg-slate-950/60'
+                }`}
+              >
+                <div className="flex items-center justify-center space-x-2 text-[11px] text-slate-400">
+                  <ImageIcon size={14} className="text-cyan-400" />
+                  <span>Drag & Drop custom photos here, or click to browse</span>
+                </div>
+                {customPhotoName && (
+                  <p className="text-[10px] font-mono text-emerald-400 mt-1 flex items-center justify-center gap-1">
+                    <Check size={12} /> Uploaded: {customPhotoName}
+                  </p>
+                )}
+              </div>
+
+              {/* Quick Preset Samples for Hackathon Judge Presentations */}
+              <div className="flex items-center gap-2 overflow-x-auto pb-1">
+                <span className="text-[11px] text-slate-400 whitespace-nowrap">Or Quick Preset:</span>
                 {SAMPLE_PHOTOS.map((item, idx) => (
                   <button
                     key={idx}
                     type="button"
-                    onClick={() => { sounds.click(); setPhotoUrl(item.url); }}
+                    onClick={() => { 
+                      sounds.click(); 
+                      setPhotoUrl(item.url); 
+                      setCustomPhotoName('');
+                    }}
                     className={`px-2 py-0.5 rounded text-[11px] font-medium whitespace-nowrap transition-all ${
-                      photoUrl === item.url
+                      photoUrl === item.url && !customPhotoName
                         ? 'bg-cyan-500 text-slate-950 font-bold'
-                        : 'bg-slate-800 text-slate-400 hover:text-white'
+                        : 'bg-slate-900 text-slate-400 hover:text-white border border-slate-800'
                     }`}
                   >
                     {item.label}
@@ -529,17 +642,26 @@ export const ReportIssueModal = ({
               <div className="relative rounded-xl overflow-hidden h-36 bg-slate-950 border border-slate-800 flex items-center justify-center">
                 <img
                   src={photoUrl}
-                  alt="Issue photo"
-                  className="w-full h-full object-cover opacity-85"
+                  alt="Issue preview"
+                  className="w-full h-full object-cover opacity-90"
                 />
+                
+                {/* Real-time Scanning Laser Line Animation if scanning */}
+                {isScanningImage && (
+                  <div className="absolute inset-0 bg-cyan-500/20 backdrop-blur-[2px] flex flex-col items-center justify-center text-cyan-300 space-y-2">
+                    <div className="w-8 h-8 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin"></div>
+                    <span className="text-xs font-mono font-bold tracking-wider">AI EXIF & DEFECT SCANNING...</span>
+                  </div>
+                )}
+
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
-                <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between text-[11px] bg-slate-950/80 backdrop-blur-md px-2.5 py-1.5 rounded-lg border border-slate-800">
+                <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between text-[11px] bg-slate-950/85 backdrop-blur-md px-2.5 py-1.5 rounded-lg border border-slate-800">
                   <span className="text-cyan-300 flex items-center gap-1.5 font-mono">
                     <Sparkles size={13} className="text-cyan-400" />
                     AI Vision: Valid Civic Defect
                   </span>
                   <span className="text-emerald-400 font-mono text-[10px] font-bold">
-                    Confidence 94.6% • Passed Anti-Spam
+                    Confidence 96.4% • Passed Anti-Spam
                   </span>
                 </div>
               </div>
