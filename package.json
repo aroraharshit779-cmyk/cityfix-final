@@ -1,0 +1,11 @@
+{
+  "name": "cityfix-portal",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CityFix - Citizen Issue Reporting & Resolution Portal",
+  "scripts": {
+    "dev": "npm --prefix promt2pixle run dev",
+    "build": "npm --prefix promt2pixle run build",
+    "preview": "npm --prefix promt2pixle run preview"
+  }
+}

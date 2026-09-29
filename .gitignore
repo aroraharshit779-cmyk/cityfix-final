@@ -1,6 +1,9 @@
 .DS_Store
 Thumbs.db
 node_modules/
+promt2pixle/node_modules/
+dist/
+promt2pixle/dist/
 .vscode/
 .idea/
 *.log
