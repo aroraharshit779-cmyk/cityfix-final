@@ -35,41 +35,53 @@ export const AdminPortal = ({
   onSelectIssue,
   onSubmitProofOfWork,
   onOpenAdminAuth,
-  onSwitchToCitizen
+  onSwitchToCitizen,
+  onSwitchToAdmin
 }) => {
   const [adminTab, setAdminTab] = useState('dispatch'); // 'dispatch', 'anti-scam-moderation', 'broadcast'
   
-  // Role Access Barrier for Non-Admins
+  // Role Access Barrier for Non-Admins with 1-Click Instant Unlock
   if (user?.role !== 'admin') {
     return (
-      <div className="p-8 sm:p-12 rounded-3xl bg-slate-900 border border-purple-500/30 text-center space-y-5 max-w-2xl mx-auto my-8 shadow-2xl animate-fadeIn">
-        <div className="w-20 h-20 rounded-3xl bg-purple-500/15 border-2 border-purple-500/40 text-purple-400 flex items-center justify-center mx-auto shadow-xl shadow-purple-500/20">
-          <Lock size={36} />
+      <div className="p-8 sm:p-12 rounded-2xl geo-card-elevated border border-purple-500/30 text-center space-y-6 max-w-2xl mx-auto my-8 shadow-2xl animate-fadeIn">
+        <div className="w-16 h-16 rounded-xl bg-purple-500/15 border border-purple-500/40 text-purple-400 flex items-center justify-center mx-auto shadow-lg shadow-purple-500/20">
+          <ShieldCheck size={32} />
         </div>
 
         <div className="space-y-2">
-          <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-purple-500/20 border border-purple-500/30 text-purple-300 font-mono text-xs">
+          <div className="geo-badge geo-badge-purple border-purple-500/30 bg-purple-500/10 text-purple-300">
             <ShieldCheck size={12} />
-            <span>AUTHORITY ACCESS RESTRICTED</span>
+            <span>MUNICIPAL OPERATIONS BARRIER</span>
           </div>
           <h2 className="text-2xl font-heading font-extrabold text-white">
             Municipal Operations & Dispatch Console
           </h2>
           <p className="text-xs text-slate-300 max-w-lg mx-auto leading-relaxed">
-            This module is restricted to authorized Municipal Department Officers, Lead Inspectors, and Central Dispatchers. Citizens can report issues and track grievance progress via the Citizen Portal.
+            This module provides municipal work-order dispatch, proof-of-work closure verification, anti-fraud moderation, and public emergency broadcasts.
           </p>
         </div>
 
         <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
           <button
             onClick={() => {
+              sounds.success();
+              onSwitchToAdmin?.();
+            }}
+            className="px-5 py-2.5 rounded-lg bg-purple-500 hover:bg-purple-400 text-white font-bold text-xs shadow-lg shadow-purple-500/30 hover:scale-[1.02] transition-all flex items-center space-x-2"
+          >
+            <Sparkles size={15} />
+            <span>Instant Authorize: Er. Rajesh Verma (Chief Admin)</span>
+          </button>
+
+          <button
+            onClick={() => {
               sounds.click();
               onOpenAdminAuth?.();
             }}
-            className="px-5 py-3 rounded-2xl bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-bold text-xs shadow-lg shadow-purple-500/30 hover:scale-105 transition-all flex items-center space-x-2"
+            className="px-4 py-2.5 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.15] text-slate-200 text-xs font-semibold transition-all flex items-center space-x-1.5"
           >
-            <ShieldCheck size={16} />
-            <span>Login as Municipal Official (CAPTCHA)</span>
+            <Lock size={14} />
+            <span>Login Gateway (CAPTCHA)</span>
           </button>
 
           <button
@@ -77,7 +89,7 @@ export const AdminPortal = ({
               sounds.click();
               onSwitchToCitizen?.();
             }}
-            className="px-5 py-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs transition-colors"
+            className="px-4 py-2.5 rounded-lg bg-transparent text-slate-400 hover:text-white text-xs font-medium transition-colors"
           >
             Return to Citizen Portal
           </button>
@@ -180,6 +192,15 @@ export const AdminPortal = ({
                   <ShieldCheck size={10} />
                   <span>MUNICIPAL CHIEF ADMIN</span>
                 </span>
+                <button
+                  onClick={() => {
+                    sounds.click();
+                    onSwitchToCitizen?.();
+                  }}
+                  className="px-2.5 py-0.5 text-[10px] font-mono rounded-md bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 text-slate-300 hover:text-white transition-colors"
+                >
+                  ⇄ Switch to Citizen Role
+                </button>
               </div>
               <p className="text-xs text-slate-400 mt-1">
                 Badge: <span className="font-mono text-purple-300">{user?.id || 'GOV-ADM-9942'}</span> • Dept: <span className="text-white font-semibold">{user?.departmentName || 'Road & Infrastructure (RID)'}</span> • Security: <span className="text-emerald-400 font-mono">Cloud Synced</span>

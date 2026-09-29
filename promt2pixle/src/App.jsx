@@ -308,6 +308,20 @@ export default function App() {
             onSelectIssue={(issue) => setSelectedIssue(issue)}
             onSubmitProofOfWork={handleSubmitProofOfWork}
             onOpenAdminAuth={() => handleOpenAuth('admin')}
+            onSwitchToAdmin={() => {
+              sounds.success();
+              setAuthUser({
+                id: "GOV-ADM-9942",
+                name: "Er. Rajesh Verma",
+                contact: "rajesh.verma@gov.cityfix.in",
+                role: "admin",
+                departmentId: "ROAD",
+                departmentName: "Road & Infrastructure (RID)",
+                avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80",
+                authSecurityToken: "GOV-TLS-ECDSA-9942",
+                verifiedAt: new Date().toISOString()
+              });
+            }}
             onSwitchToCitizen={() => {
               sounds.click();
               setAuthUser({
