@@ -336,21 +336,34 @@ export default function App() {
 
       </main>
 
-      {/* Executive Footer */}
-      <footer className="border-t border-slate-900 bg-slate-950/90 py-6 text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="flex items-center space-x-2.5">
-            <img src={cityFixLogo} alt="Logo" className="w-5 h-4 object-contain" />
-            <span className="font-heading font-extrabold text-slate-200">CityFix</span>
-            <span className="text-slate-400">• Enterprise Civic Governance & AI Resolution Platform</span>
+      {/* Minimalist Geometric Enterprise Footer */}
+      <footer className="border-t border-white/[0.08] bg-[#02050d] py-8 text-xs text-slate-400">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          
+          <div className="flex items-center space-x-3">
+            <div className="w-7 h-7 rounded-md border border-cyan-500/30 bg-cyan-950/20 flex items-center justify-center">
+              <img src={cityFixLogo} alt="CityFix Logo" className="w-5 h-5 object-contain" />
+            </div>
+            <div>
+              <div className="flex items-center space-x-2">
+                <span className="font-heading font-bold text-white tracking-wide text-sm">CITYFIX</span>
+                <span className="geo-badge text-[9px] py-0.5 px-1.5 bg-white/[0.04] text-slate-300">GEO-GRID OS</span>
+              </div>
+              <p className="text-[11px] text-slate-400 font-mono">Civic Intelligence • Anti-Scam Shield • Proof-of-Work Verification</p>
+            </div>
           </div>
-          <div className="flex items-center space-x-3 font-mono text-[11px] text-slate-400">
-            <span className="text-emerald-400">● Cloud Synced (AWS ap-south-1)</span>
-            <span>•</span>
-            <span>Anti-Bot CAPTCHA Verified</span>
-            <span>•</span>
-            <span>Proof-of-Work Loop</span>
+
+          <div className="flex flex-wrap items-center justify-center gap-3 font-mono text-[11px] text-slate-400">
+            <div className="flex items-center space-x-1.5 text-emerald-400">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>AWS ap-south-1 ACTIVE</span>
+            </div>
+            <span className="text-white/20">•</span>
+            <span>ECDSA-256 ENCRYPTED</span>
+            <span className="text-white/20">•</span>
+            <span>PROPORTIONAL 50m DEDUPLICATION</span>
           </div>
+
         </div>
       </footer>
 

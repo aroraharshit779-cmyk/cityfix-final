@@ -65,95 +65,98 @@ export const Navbar = ({
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-cyan-500/20 bg-slate-950/90 backdrop-blur-2xl">
+    <header className="sticky top-0 z-40 w-full border-b border-white/[0.08] bg-[#030712]/90 backdrop-blur-2xl">
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           
-          {/* Brand Logo & Tagline */}
+          {/* Minimalist Geometric Brand Identity */}
           <div 
             onClick={() => handleNav('map')} 
-            className="flex items-center space-x-3 cursor-pointer group shrink-0"
+            className="flex items-center space-x-3.5 cursor-pointer group shrink-0 select-none"
           >
-            <div className="relative flex items-center justify-center w-11 h-9 group-hover:scale-105 transition-all">
-              <div className="absolute inset-0 bg-cyan-400/20 blur-md rounded-full"></div>
+            <div className="relative flex items-center justify-center w-10 h-10 rounded-lg border border-cyan-500/30 bg-cyan-950/20 group-hover:border-cyan-400/60 group-hover:bg-cyan-900/30 transition-all duration-300">
+              <div className="absolute inset-0 bg-cyan-400/15 blur-sm rounded-lg"></div>
               <img 
                 src={cityFixLogo} 
-                alt="CityFix Cloud Infinity Logo" 
-                className="relative z-10 w-full h-full object-contain filter drop-shadow-[0_2px_10px_rgba(6,182,212,0.5)]"
+                alt="CityFix Scalable Vector Logo" 
+                className="relative z-10 w-7 h-7 object-contain filter drop-shadow-[0_0_12px_rgba(6,182,212,0.6)] group-hover:scale-105 transition-transform"
               />
             </div>
             <div>
-              <div className="flex items-center space-x-1.5">
-                <span className="font-heading font-extrabold text-xl tracking-tight text-white">
-                  City<span className="text-cyan-400">Fix</span>
+              <div className="flex items-center space-x-2">
+                <span className="font-heading font-extrabold text-lg tracking-tight text-white flex items-center">
+                  CITY<span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-sky-300">FIX</span>
                 </span>
-                <span className="px-1.5 py-0.5 text-[10px] font-mono rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
-                  CIVIC OS
+                <span className="px-1.5 py-0.5 text-[9px] font-mono font-semibold tracking-wider rounded border border-cyan-500/30 bg-cyan-500/10 text-cyan-300">
+                  ENTERPRISE
                 </span>
               </div>
-              <p className="text-[10px] text-slate-400 font-medium tracking-wide hidden sm:block">
-                Smart Governance • Proof-of-Work Loop
-              </p>
+              <div className="flex items-center space-x-2 text-[10px] font-mono text-slate-400 tracking-wider">
+                <span className="flex items-center space-x-1 text-emerald-400">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span>ONLINE</span>
+                </span>
+                <span>•</span>
+                <span className="hidden sm:inline text-slate-400">GEO-INTELLIGENCE MATRIX</span>
+              </div>
             </div>
           </div>
 
-          {/* Center Navigation Links (Desktop) */}
-          <nav className="hidden lg:flex items-center space-x-1 bg-slate-900/80 p-1.5 rounded-2xl border border-white/5 shadow-inner">
+          {/* Center Navigation Tabs (Minimal Geometric Proportions) */}
+          <nav className="hidden lg:flex items-center space-x-1 bg-[#090e1a]/90 p-1 rounded-xl border border-white/[0.08] shadow-inner">
             
             {/* Citizen Portal Tab */}
             <button
               onClick={() => handleNav('citizen')}
-              className={`flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
+              className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold tracking-wide transition-all ${
                 activeTab === 'citizen'
-                  ? 'bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 shadow-md shadow-cyan-500/25'
-                  : 'text-cyan-300 hover:text-white hover:bg-cyan-500/10'
+                  ? 'bg-cyan-500 text-slate-950 font-bold shadow-[0_0_20px_-3px_rgba(6,182,212,0.4)]'
+                  : 'text-slate-300 hover:text-white hover:bg-white/[0.04]'
               }`}
             >
-              <User size={14} />
+              <User size={13} />
               <span>Citizen Portal</span>
             </button>
 
             {/* Admin Portal Tab */}
             <button
               onClick={() => handleNav('admin')}
-              className={`flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
+              className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold tracking-wide transition-all ${
                 activeTab === 'admin'
-                  ? 'bg-gradient-to-r from-purple-500 to-indigo-600 text-white shadow-md shadow-purple-500/25'
-                  : 'text-purple-300 hover:text-white hover:bg-purple-500/10'
+                  ? 'bg-purple-500 text-white font-bold shadow-[0_0_20px_-3px_rgba(168,85,247,0.4)]'
+                  : 'text-slate-300 hover:text-white hover:bg-white/[0.04]'
               }`}
             >
-              <ShieldCheck size={14} />
+              <ShieldCheck size={13} />
               <span>Admin Portal</span>
             </button>
 
             {/* Radar Map */}
             <button
               onClick={() => handleNav('map')}
-              className={`flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all ${
+              className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold tracking-wide transition-all ${
                 activeTab === 'map'
-                  ? 'bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/25'
-                  : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
+                  ? 'bg-white/10 text-cyan-300 border border-cyan-500/30 font-bold'
+                  : 'text-slate-300 hover:text-white hover:bg-white/[0.04]'
               }`}
             >
-              <Radio size={14} className={activeTab === 'map' ? 'animate-spin' : ''} />
-              <span>Radar Map</span>
+              <Radio size={13} className={activeTab === 'map' ? 'text-cyan-400' : ''} />
+              <span>Radar Matrix</span>
             </button>
 
             {/* Complaints Feed */}
             <button
               onClick={() => handleNav('feed')}
-              className={`flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all ${
+              className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold tracking-wide transition-all ${
                 activeTab === 'feed'
-                  ? 'bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/25'
-                  : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
+                  ? 'bg-white/10 text-cyan-300 border border-cyan-500/30 font-bold'
+                  : 'text-slate-300 hover:text-white hover:bg-white/[0.04]'
               }`}
             >
-              <Layers size={14} />
-              <span>Feed</span>
-              <span className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full ${
-                activeTab === 'feed' ? 'bg-slate-950/40 text-slate-900 font-bold' : 'bg-slate-800 text-slate-300'
-              }`}>
+              <Layers size={13} />
+              <span>Telemetry Feed</span>
+              <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-white/[0.08] text-slate-300">
                 {issuesCount}
               </span>
             </button>
@@ -161,56 +164,57 @@ export const Navbar = ({
             {/* Transparency Hub */}
             <button
               onClick={() => handleNav('dashboard')}
-              className={`flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all ${
+              className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold tracking-wide transition-all ${
                 activeTab === 'dashboard'
-                  ? 'bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/25'
-                  : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
+                  ? 'bg-white/10 text-cyan-300 border border-cyan-500/30 font-bold'
+                  : 'text-slate-300 hover:text-white hover:bg-white/[0.04]'
               }`}
             >
-              <BarChart3 size={14} />
+              <BarChart3 size={13} />
               <span>Transparency</span>
             </button>
 
           </nav>
 
           {/* Right Action Buttons */}
-          <div className="flex items-center space-x-2 sm:space-x-2.5">
+          {/* Right Action Buttons (Intelligent Simplicity & Geometric Silhouettes) */}
+          <div className="flex items-center space-x-2 sm:space-x-3">
             
             {/* Quick Ticket Tracker search */}
             <form onSubmit={handleSearchSubmit} className="relative hidden md:block">
               <input
                 type="text"
-                placeholder="Track Ticket..."
+                placeholder="TRACK TICKET #"
                 value={searchVal}
                 onChange={(e) => setSearchVal(e.target.value)}
-                className="w-28 xl:w-36 pl-7 pr-2.5 py-1.5 rounded-xl bg-slate-900/90 border border-slate-700/60 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 font-mono transition-all"
+                className="w-28 xl:w-36 pl-7 pr-2.5 py-1.5 rounded-lg bg-white/[0.03] border border-white/[0.1] text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:bg-white/[0.06] font-mono transition-all"
               />
-              <Search className="w-3 h-3 text-slate-400 absolute left-2 top-2.5" />
+              <Search className="w-3 h-3 text-slate-400 absolute left-2.5 top-2.5" />
             </form>
 
-            {/* Report Issue CTA */}
+            {/* Report Issue CTA - High Silhouette Vector Accent */}
             <button
               onClick={() => {
                 sounds.click();
                 onOpenReportModal();
               }}
-              className="flex items-center space-x-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-cyan-400 via-cyan-500 to-blue-600 text-slate-950 font-extrabold text-xs shadow-md shadow-cyan-500/25 hover:scale-[1.02] active:scale-[0.98] transition-all"
+              className="flex items-center space-x-1.5 px-3.5 py-1.5 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs shadow-[0_0_20px_-3px_rgba(6,182,212,0.45)] hover:scale-[1.02] active:scale-[0.98] transition-all tracking-wide"
             >
-              <PlusCircle size={15} />
-              <span>Report</span>
+              <PlusCircle size={14} />
+              <span>Report Issue</span>
             </button>
 
-            {/* PROMINENT LOGIN PORTAL BUTTON */}
+            {/* Enterprise Login Portal Gateway */}
             <button
               onClick={() => {
                 sounds.click();
                 onOpenAuthModal(authUser?.role === 'admin' ? 'admin' : 'citizen');
               }}
-              className="flex items-center space-x-1.5 px-3 py-2 rounded-xl bg-gradient-to-r from-slate-900 to-slate-800 hover:from-slate-800 hover:to-slate-700 border border-cyan-500/40 hover:border-cyan-400 text-cyan-300 hover:text-white font-bold text-xs shadow-md transition-all group"
+              className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.12] hover:border-cyan-500/50 text-slate-200 hover:text-white font-semibold text-xs transition-all group"
               title="Open Secure Login Gateway (Anti-Bot CAPTCHA)"
             >
-              <KeyRound size={14} className="text-cyan-400 group-hover:rotate-45 transition-transform" />
-              <span className="hidden sm:inline">Login Portal</span>
+              <KeyRound size={13} className="text-cyan-400 group-hover:rotate-45 transition-transform" />
+              <span className="hidden sm:inline">Access Gateway</span>
               <span className="sm:hidden">Login</span>
             </button>
 

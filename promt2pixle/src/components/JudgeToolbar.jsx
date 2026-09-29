@@ -12,7 +12,8 @@ import {
   Server,
   Zap,
   Globe,
-  KeyRound
+  KeyRound,
+  Activity
 } from 'lucide-react';
 import { cloudStorage } from '../services/cloudStorage';
 import { sounds } from '../utils/audio';
@@ -35,14 +36,14 @@ export const JudgeToolbar = ({
   }, []);
 
   return (
-    <div className="w-full bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 border-b border-cyan-500/20 shadow-lg text-xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex flex-wrap items-center justify-between gap-2.5">
+    <div className="w-full bg-[#02050d] border-b border-white/[0.08] text-xs">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex flex-wrap items-center justify-between gap-3">
         
         {/* Left: Judge Presentation Badge + Cloud Sync Telemetry */}
-        <div className="flex items-center space-x-3">
-          <div className="flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 font-mono text-[11px]">
-            <Sparkles size={12} className="text-amber-400 animate-pulse" />
-            <span className="font-bold tracking-wider">JUDGE SHOWCASE MODE</span>
+        <div className="flex items-center space-x-3.5">
+          <div className="geo-badge geo-badge-cyan">
+            <Activity size={12} className="text-cyan-400 animate-pulse" />
+            <span>EXECUTIVE SHOWCASE HUD</span>
           </div>
 
           <div className="hidden md:flex items-center space-x-2 text-[11px] font-mono text-slate-400">
@@ -50,14 +51,16 @@ export const JudgeToolbar = ({
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
             </span>
-            <span className="text-emerald-400 font-medium">Cloud Database:</span>
-            <span className="text-slate-300">{telemetry.latencyMs}ms</span>
-            <span className="text-slate-600">•</span>
+            <span className="text-slate-300">TELEMETRY:</span>
+            <span className="text-emerald-400 font-semibold">{telemetry.latencyMs}ms latency</span>
+            <span className="text-white/20">•</span>
             <span className="text-slate-400">AWS ap-south-1</span>
+            <span className="text-white/20">•</span>
+            <span className="text-cyan-400/90 font-mono">ENCRYPTED SHIELD</span>
           </div>
         </div>
 
-        {/* Right: Quick Judge Action Triggers */}
+        {/* Right: Quick Action Triggers with Geometric Silhouettes */}
         <div className="flex flex-wrap items-center gap-2">
           
           {/* Direct Login Portal trigger */}
@@ -66,11 +69,11 @@ export const JudgeToolbar = ({
               sounds.click();
               onOpenAuthModal('citizen');
             }}
-            className="px-2.5 py-1 rounded-lg bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-500/40 text-cyan-300 font-bold text-[11px] flex items-center space-x-1.5 transition-all hover:scale-105"
+            className="px-2.5 py-1 rounded-md bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 font-mono font-medium text-[11px] flex items-center space-x-1.5 transition-all hover:border-cyan-400"
             title="Open Login Portal & Anti-Bot CAPTCHA Challenge"
           >
-            <KeyRound size={12} className="text-cyan-400" />
-            <span>Login Gateway (CAPTCHA)</span>
+            <KeyRound size={11} className="text-cyan-400" />
+            <span>LOGIN GATEWAY</span>
           </button>
 
           {/* Quick Duplicate Trigger */}
@@ -79,11 +82,11 @@ export const JudgeToolbar = ({
               sounds.alert();
               onTriggerDemoDuplicate();
             }}
-            className="px-2.5 py-1 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/30 text-amber-300 font-semibold text-[11px] flex items-center space-x-1.5 transition-all hover:scale-105"
+            className="px-2.5 py-1 rounded-md bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-300 font-mono font-medium text-[11px] flex items-center space-x-1.5 transition-all hover:border-amber-400"
             title="Simulate dropping a complaint within 50m radius of existing Metro Gate 3 pothole"
           >
-            <Zap size={12} className="text-amber-400" />
-            <span>Test 50m AI Duplicate</span>
+            <Zap size={11} className="text-amber-400" />
+            <span>TEST 50m AI DEDUPLICATION</span>
           </button>
 
           {/* Quick Anti-Scam Shield Trigger */}
@@ -92,29 +95,17 @@ export const JudgeToolbar = ({
               sounds.click();
               onOpenScamModal();
             }}
-            className="px-2.5 py-1 rounded-lg bg-rose-500/15 hover:bg-rose-500/25 border border-rose-500/30 text-rose-300 font-semibold text-[11px] flex items-center space-x-1.5 transition-all hover:scale-105"
+            className="px-2.5 py-1 rounded-md bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-300 font-mono font-medium text-[11px] flex items-center space-x-1.5 transition-all hover:border-rose-400"
             title="Inspect Anti-Scam & Phishing Defense Center"
           >
-            <ShieldAlert size={12} className="text-rose-400" />
-            <span>Anti-Scam Defense</span>
+            <ShieldAlert size={11} className="text-rose-400" />
+            <span>ANTI-SCAM SHIELD</span>
           </button>
 
-          {/* 1-Click Role Switch */}
-          <button
-            onClick={() => {
-              sounds.click();
-              if (activeTab === 'admin') {
-                setActiveTab('citizen');
-              } else {
-                setActiveTab('admin');
-              }
-            }}
-            className="px-2.5 py-1 rounded-lg bg-purple-500/15 hover:bg-purple-500/25 border border-purple-500/30 text-purple-300 font-semibold text-[11px] flex items-center space-x-1.5 transition-all hover:scale-105"
-            title="Toggle between Citizen View and Municipal Admin Operations"
-          >
-            <ShieldCheck size={12} className="text-purple-400" />
-            <span>Switch: {activeTab === 'admin' ? 'Citizen View' : 'Admin Control'}</span>
-          </button>
+          {/* Reset Demo Data */}
+          <div className="hidden lg:flex items-center pl-1 font-mono text-[10px] text-slate-400">
+            <span>NODES: 6/6 ACTIVE</span>
+          </div>
 
         </div>
 
