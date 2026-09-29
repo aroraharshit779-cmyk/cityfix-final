@@ -34,13 +34,13 @@ export const Navbar = ({
   onOpenScamModal,
   onOpenReportModal,
   onOpenTrackModal,
-  onOpenPosterModal,
   onResetData,
   onTriggerDemoDuplicate,
   soundEnabled,
   setSoundEnabled,
   issuesCount = 0
 }) => {
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const [searchVal, setSearchVal] = useState('');

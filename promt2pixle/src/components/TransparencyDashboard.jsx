@@ -21,9 +21,9 @@ import { sounds } from '../utils/audio';
 
 export const TransparencyDashboard = ({
   issues = [],
-  onSelectIssue,
-  onOpenPosterModal
+  onSelectIssue
 }) => {
+
   const [selectedWardFilter, setSelectedWardFilter] = useState('ALL');
   const [selectedDeptFilter, setSelectedDeptFilter] = useState('ALL');
   const [selectedStatusFilter, setSelectedStatusFilter] = useState('ALL');
@@ -131,40 +131,34 @@ export const TransparencyDashboard = ({
         </button>
       </div>
 
-      {/* Smart City Master Blueprint & Poster Showcase Banner */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-900 via-cyan-950/40 to-slate-900 border border-cyan-500/30 p-5 shadow-xl flex flex-col md:flex-row items-center justify-between gap-5">
+      {/* CityFix AI Governance & Real-Time Telemetry Banner */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-slate-900 via-cyan-950/40 to-slate-900 border border-cyan-500/30 p-6 shadow-xl flex flex-col md:flex-row items-center justify-between gap-5">
         <div className="flex items-center space-x-4">
-          <div 
-            className="relative w-20 h-28 rounded-xl overflow-hidden border border-cyan-400/40 shadow-lg shrink-0 group cursor-pointer" 
-            onClick={onOpenPosterModal}
-            title="Click to view full-size poster"
-          >
-            <img src="/cityfix-poster.jpg" alt="A Smarter Tomorrow Poster" className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
-            <div className="absolute inset-0 bg-cyan-500/10 group-hover:bg-transparent transition-colors"></div>
+          <div className="w-14 h-14 rounded-2xl bg-cyan-500/15 border border-cyan-400/40 text-cyan-400 flex items-center justify-center shrink-0 shadow-lg shadow-cyan-500/20">
+            <BarChart3 size={28} />
           </div>
           <div className="space-y-1">
             <div className="flex items-center space-x-2">
               <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-bold">
-                VISION 2030 BLUEPRINT
+                MUNICIPAL AI GOVERNANCE
               </span>
-              <span className="text-xs text-slate-400 font-mono">People • Technology • Nature in Harmony</span>
+              <span className="text-xs text-slate-400 font-mono">Real-Time Ward Telemetry • Proof-of-Work Loop</span>
             </div>
             <h3 className="font-heading font-bold text-base text-white">
-              A Smarter Tomorrow: Integrated Civic Infrastructure
+              Automated Citizen Grievance Triage & Resolution Ledger
             </h3>
             <p className="text-xs text-slate-300 max-w-xl">
-              CityFix powers the municipal governance layer connecting rooftop solar, automated subterranean logistics, biophilic housing, and cyclic water recycling into one unified civic system.
+              CityFix links 50m spatial geofence duplicate detection, automated multi-department routing, and EXIF photo-validated resolution closure into an immutable public audit trail.
             </p>
           </div>
         </div>
-        <button
-          onClick={() => { sounds.click(); onOpenPosterModal(); }}
-          className="flex items-center space-x-1.5 px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs shadow-lg shadow-cyan-500/25 transition-all whitespace-nowrap self-stretch md:self-auto justify-center"
-        >
-          <Sparkles size={14} />
-          <span>View Full Blueprint & Poster</span>
-        </button>
+        <div className="flex items-center space-x-2 shrink-0">
+          <span className="px-3 py-1.5 rounded-xl bg-slate-800 text-cyan-300 font-mono text-xs border border-cyan-500/30">
+            ⚡ 18.6h SLA Average
+          </span>
+        </div>
       </div>
+
 
       {/* KPI Metrics Cards (USP 4) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">

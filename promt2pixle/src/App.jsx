@@ -9,7 +9,6 @@ import { TransparencyDashboard } from './components/TransparencyDashboard';
 import { ReportIssueModal } from './components/ReportIssueModal';
 import { IssueDetailModal } from './components/IssueDetailModal';
 import { TicketTrackerModal } from './components/TicketTrackerModal';
-import { SmartCityPosterModal } from './components/SmartCityPosterModal';
 import { AuthModal } from './components/AuthModal';
 import { ScamAwarenessModal } from './components/ScamAwarenessModal';
 import { INITIAL_ISSUES } from './data/mockData';
@@ -54,13 +53,13 @@ export default function App() {
   const [reportLocation, setReportLocation] = useState(null);
   const [trackModalOpen, setTrackModalOpen] = useState(false);
   const [trackSearchQuery, setTrackSearchQuery] = useState('');
-  const [posterModalOpen, setPosterModalOpen] = useState(false);
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [authModalRole, setAuthModalRole] = useState('citizen');
   const [scamModalOpen, setScamModalOpen] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
 
   // Sync issues to cloud database
+
   useEffect(() => {
     cloudStorage.saveIssues(issues);
   }, [issues]);
@@ -248,11 +247,11 @@ export default function App() {
           setReportModalOpen(true);
         }}
         onOpenTrackModal={handleOpenTrackModal}
-        onOpenPosterModal={() => setPosterModalOpen(true)}
         onResetData={handleResetData}
         onTriggerDemoDuplicate={handleTriggerDemoDuplicate}
         soundEnabled={soundEnabled}
         setSoundEnabled={setSoundEnabled}
+
         issuesCount={issues.length}
       />
 
@@ -330,9 +329,9 @@ export default function App() {
           <TransparencyDashboard
             issues={issues}
             onSelectIssue={(issue) => setSelectedIssue(issue)}
-            onOpenPosterModal={() => setPosterModalOpen(true)}
           />
         )}
+
 
       </main>
 
@@ -370,11 +369,6 @@ export default function App() {
         onClose={() => setScamModalOpen(false)}
       />
 
-      {/* Smart City Master Blueprint & Poster Modal */}
-      <SmartCityPosterModal
-        isOpen={posterModalOpen}
-        onClose={() => setPosterModalOpen(false)}
-      />
 
       {/* Report Issue Modal with AI Duplicate Detection Guard */}
       <ReportIssueModal
